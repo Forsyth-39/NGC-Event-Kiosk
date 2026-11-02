@@ -1,1 +1,1 @@
-# NGC Ticket system
+# NGC Kiosk

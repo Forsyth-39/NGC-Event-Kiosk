@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to the database and define a cursor
-def CreateEventsTable():
+def CreateMembersTable():
     try:
         conn = sqlite3.connect('')
         print("Database connected successfully") 
@@ -11,18 +11,17 @@ def CreateEventsTable():
     cursor = conn.cursor()
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS events (
+        CREATE TABLE IF NOT EXISTS members (
                    id INTEGER PRIMARY KEY,
-                   company TEXT,
-                   organiser_name TEXT,
-                   room_number INTEGER,
-                   capacity INTEGER
+                   name TEXT,
+                   email TEXT,
+                   reference_number TEXT
         )
 """)
     
     cursor.execute(
-        "INSERT INTO events (company, organiser_name, room_number, capacity) VALUES (?, ?, ?, ?)",
-        ("Playstation", "James Olivier", 12, 500)
+        "INSERT INTO members (name, email, reference_number) VALUES (?, ?, ?)",
+        ("Liam", "testuser@gmail.com", "LF1234567")
     )
 
     conn.commit()
@@ -32,13 +31,32 @@ def CreateEventsTable():
     result = cursor.fetchone()
     print(f"SQLITE version: {result[0]}")
 
-    cursor.execute("SELECT * FROM events")
+    cursor.execute("SELECT * FROM members")
     rows = cursor.fetchall()
 
     for row in rows:
         print(row)
 
-    conn.close()
+    LogIn(conn)
 
+def LogIn(conn):
+    cursor = conn.cursor()
 
-CreateEventsTable()
+    print("Enter your name")
+    name = input("> ")
+
+    print("Enter your reference number:")
+    urn = input("> ")
+
+    cursor.execute(f"""SELECT reference_number FROM members 
+                   WHERE {name} == name """)
+    
+    result = cursor.fetchone()
+
+    if result == urn:
+        print("User found")
+    else:
+        print("You entered an incorrect reference number")
+    
+
+CreateMembersTable()

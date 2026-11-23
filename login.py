@@ -14,4 +14,4 @@ def login():
         exit()
     return bookingReference
 
-referenceNumber = login()
+

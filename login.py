@@ -12,4 +12,3 @@ def login():
     if not firstThreeCharacters.isalpha():
         print("The first three characters of the reference number need to be letters")
         exit()
-    return bookingReference

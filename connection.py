@@ -8,6 +8,6 @@ try:
         password="nLJdJgd072BbkPJvnYmZ",
         database="KioskTest82",
     )
-    print("Connection successful")
+    # print("Connection successful")
 except:
     print("Connection failed")
